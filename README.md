@@ -53,16 +53,25 @@ Handles payments - calculates expenses, collects contact info and credit card de
 
 ## Usage Examples
 
+**Getting Started:**
+1. Start the agent using `uv run python main.py console`
+2. The Greeter Agent will automatically welcome you to the restaurant
+3. Say "Hi!" or any greeting to initiate the conversation
+4. The agent will then listen to other agent calling it (for example interface agent)
+5. Continue your conversation naturally - the system will route you to the appropriate specialized agent
+
 **Making a Reservation:**
 1. Say: "I'd like to make a reservation"
-2. Provide preferred time, name, and phone
-3. Confirm details
+2. The system routes you to the Reservation Agent
+3. Provide preferred time, name, and phone
+4. Confirm details
 
 **Ordering Takeaway:**
 1. Say: "I want to order food"
-2. Place order from menu
-3. Provide payment information
-4. Complete transaction
+2. The system routes you to the Takeaway Agent
+3. Place order from menu
+4. Get routed to Checkout Agent for payment
+5. Provide payment information and complete transaction
 
 ## Creator Details
 - **Name:** Ahsen Tahir

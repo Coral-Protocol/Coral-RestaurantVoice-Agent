@@ -126,7 +126,9 @@ class BaseAgent(Agent):
         # add an instructions including the user data as assistant message
         chat_ctx.add_message(
             role="system",  # role=system works for OpenAI's LLM and Realtime API
-            content=f"You are {agent_name} agent. Current user data is {userdata.summarize()}",
+            content=f"You are {agent_name} agent. Current user data is {userdata.summarize()}. "
+            f"You can communicate with external agents outside the restaurant system using wait_for_mentions to listen for incoming messages all the time and send_message tool to respond to external agents. "
+            f"Continuously monitor for mentions from external agents and respond appropriately when contacted by outside systems.Soon after your introduction, you should start calling the wait_for_mentions tool to monitor for external agents.",
         )
         await self.update_chat_ctx(chat_ctx)
         self.session.generate_reply(tool_choice="none")
@@ -144,9 +146,13 @@ class Greeter(BaseAgent):
     def __init__(self, menu: str) -> None:
         super().__init__(
             instructions=(
-                f"You are a friendly restaurant receptionist. The menu is: {menu}\n"
-                "Your jobs are to greet the caller and understand if they want to "
-                "make a reservation or order takeaway. Guide them to the right agent using tools."
+                f"You are a friendly restaurant receptionist.you have to remain completely silent until an external agent mentions you just introduce yourself and do not wait for the person to respond to your greeting ,then you must call the 'wait for mentions' tool continuously from the MCP integration to listen for messages from external agents. The menu is: {menu}\n"
+                "Your jobs are to greet the other agent that mentions you and understand what they want "
+                "make a reservation or order takeaway. Guide them to the right agent using tools.\n"
+                "External Agent Communication:\n"
+                "- Use wait_for_mentions tool all the time to check for messages from external agents\n"
+                "- Use send_message tool to respond to external agents when they contact the restaurant\n"   
+                "- If customers want to send messages to external services, help facilitate that communication using send_message tool"
             ),
             llm=openai.LLM(parallel_tool_calls=False),
             tts=cartesia.TTS(voice=voices["greeter"]),
@@ -210,7 +216,7 @@ class Takeaway(BaseAgent):
             instructions=(
                 f"Your are a takeaway agent that takes orders from the customer. "
                 f"Our menu is: {menu}\n"
-                "Clarify special requests and confirm the order with the customer."
+                "Clarify special requests and confirm the order with the customer.",
             ),
             tools=[to_greeter],
             tts=cartesia.TTS(voice=voices["takeaway"]),
@@ -241,7 +247,7 @@ class Checkout(BaseAgent):
     def __init__(self, menu: str) -> None:
         super().__init__(
             instructions=(
-                f"You are a checkout agent at a restaurant. The menu is: {menu}\n"
+                 f"You are a checkout agent at a restaurant. The menu is: {menu}\n"
                 "Your are responsible for confirming the expense of the "
                 "order and then collecting customer's name, phone number and credit card "
                 "information, including the card number, expiry date, and CVV step by step."
@@ -306,7 +312,7 @@ async def entrypoint(ctx: JobContext):
     # MCP Server configuration
     base_url = "http://localhost:5555/devmode/exampleApplication/privkey/session1/sse"
     params = {
-        "waitForAgents": 1,
+        "waitForAgents": 2,
         "agentId": "restaurant_assistant",
         "agentDescription": "You are a helpful restaurant AI assistant that can handle reservations, takeaway orders, and payments."
     }
@@ -333,8 +339,8 @@ async def entrypoint(ctx: JobContext):
         mcp_servers=[
             mcp.MCPServerHTTP(
                 url=MCP_SERVER_URL,
-                timeout=10,
-                client_session_timeout_seconds=10,
+                timeout=100,
+                client_session_timeout_seconds=100,
             ),
         ],
         # to use realtime model, replace the stt, llm, tts and vad with the following
