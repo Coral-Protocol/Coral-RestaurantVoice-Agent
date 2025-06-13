@@ -1,7 +1,9 @@
 # Restaurant Voice Agent System
 
-## Responsibility:
-A multi-agent voice conversation system for restaurants that handles reservations, takeaway orders, and checkout through natural voice interactions. Features four specialized AI agents that seamlessly transfer conversations while maintaining context.
+The Restaurant Voice Agent System is a multi-agent voice conversation system for restaurants that handles reservations, takeaway orders, and checkout through natural voice interactions. It features four specialized AI agents that seamlessly transfer conversations while maintaining context.
+
+## Responsibility
+A multi-agent voice system for restaurants, enabling natural, seamless voice-based reservations, orders, and payments by routing conversations between specialized agents.
 
 ## Details
 - **Framework:** LiveKit Agents
@@ -11,13 +13,28 @@ A multi-agent voice conversation system for restaurants that handles reservation
 - **License:** MIT
 - **Original Source:** [Restaurant Voice Agent System](https://github.com/livekit/agents/blob/main/examples/voice_agents/restaurant_agent.py)
 
-## Install Dependencies
+## Use the Agent
+
+### 1. Clone & Install Dependencies
+
+Ensure that the [Coral Server](https://github.com/Coral-Protocol/coral-server) is running on your system. If you are trying to run Restaurant Voice Agent and require an input, you can either create your agent which communicates on the coral server or run and register the [Interface Agent](https://github.com/Coral-Protocol/Coral-Interface-Agent) on the Coral Server.
+
+<details>
+
 ```bash
+# Install `uv`:
 pip install uv
+
+# Install dependencies from `pyproject.toml` using `uv`:
 uv sync
 ```
 
-## Configure Environment Variables
+</details>
+
+### 2. Configure Environment Variables
+
+<details>
+
 Copy the example file and add your API keys:
 
 ```bash
@@ -26,21 +43,37 @@ cp .env.example .env
 
 Update `.env` with:
 - `LIVEKIT_URL`
-- `LIVEKIT_API_KEY`
-- `LIVEKIT_API_SECRET`
-- `OPENAI_API_KEY`
-- `DEEPGRAM_API_KEY`
-- `CARTESIA_API_KEY`
+- `LIVEKIT_API_KEY` ([Get LiveKit API Key](https://cloud.livekit.io/))
+- `LIVEKIT_API_SECRET` ([Get LiveKit API Secret](https://cloud.livekit.io/))
+- `OPENAI_API_KEY` ([Get OpenAI API Key](https://platform.openai.com/api-keys))
+- `DEEPGRAM_API_KEY` ([Get Deepgram API Key](https://deepgram.com/))
+- `CARTESIA_API_KEY` ([Get Cartesia API Key](https://play.cartesia.ai/keys))
 
-## Run Agent
+</details>
+
+## 3. Run Agent
+<details>
+
 ```bash
 uv run python main.py console
 ```
 
+</details>
+
+## 4. Example
+<details>
+
+### Agent System
+
+- **🏪 Greeter Agent:** Welcomes customers, presents menu (Pizza $10, Salad $5, Ice Cream $3, Coffee $2), and routes to specialized agents.
+- **📅 Reservation Agent:** Handles dining reservations - collects time, customer name, and phone number.
+- **🥡 Takeaway Agent:** Processes food orders - takes orders from menu, clarifies requests, confirms details.
+- **💳 Checkout Agent:** Handles payments - calculates expenses, collects contact info and credit card details.
+
 ## Agent System
 
 ### 🏪 Greeter Agent
-Restaurant receptionist that welcomes customers, presents menu (Pizza $10, Salad $5, Ice Cream $3, Coffee $2), and routes to specialized agents.
+Welcomes customers, presents menu (Pizza $10, Salad $5, Ice Cream $3, Coffee $2), and routes to specialized agents.
 
 ### 📅 Reservation Agent
 Handles dining reservations - collects time, customer name, and phone number.
@@ -52,6 +85,8 @@ Processes food orders - takes orders from menu, clarifies requests, confirms det
 Handles payments - calculates expenses, collects contact info and credit card details.
 
 ## Usage Examples
+
+<details>
 
 **Getting Started:**
 1. Start the agent using `uv run python main.py console`
@@ -72,6 +107,8 @@ Handles payments - calculates expenses, collects contact info and credit card de
 3. Place order from menu
 4. Get routed to Checkout Agent for payment
 5. Provide payment information and complete transaction
+
+</details>
 
 ## Creator Details
 - **Name:** Ahsen Tahir
