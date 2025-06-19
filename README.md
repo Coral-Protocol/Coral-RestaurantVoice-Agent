@@ -68,13 +68,6 @@ uv run python main.py console
 ## 4. Example
 <details>
 
-### Agent System
-
-- **🏪 Greeter Agent:** Welcomes customers, presents menu (Pizza $10, Salad $5, Ice Cream $3, Coffee $2), and routes to specialized agents.
-- **📅 Reservation Agent:** Handles dining reservations - collects time, customer name, and phone number.
-- **🥡 Takeaway Agent:** Processes food orders - takes orders from menu, clarifies requests, confirms details.
-- **💳 Checkout Agent:** Handles payments - calculates expenses, collects contact info and credit card details.
-
 ## Agent System
 
 ### 🏪 Greeter Agent
