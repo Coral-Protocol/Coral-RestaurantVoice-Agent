@@ -310,7 +310,7 @@ async def entrypoint(ctx: JobContext):
     await ctx.connect()
 
     # MCP Server configuration
-    base_url = "http://localhost:5555/devmode/exampleApplication/privkey/session1/sse"
+    base_url = os.getenv("CORAL_SERVER_URL")
     params = {
         "waitForAgents": 2,
         "agentId": "restaurant_assistant",
