@@ -310,10 +310,10 @@ async def entrypoint(ctx: JobContext):
     await ctx.connect()
 
     # MCP Server configuration
-    base_url = os.getenv("CORAL_SERVER_URL")
+    base_url = os.getenv("CORAL_SSE_URL")
     params = {
         "waitForAgents": 2,
-        "agentId": "restaurant_assistant",
+        "agentId": os.getenv("CORAL_AGENT_ID"),
         "agentDescription": "You are a helpful restaurant AI assistant that can handle reservations, takeaway orders, and payments."
     }
     query_string = urllib.parse.urlencode(params)
