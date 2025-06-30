@@ -12,7 +12,7 @@ from livekit.agents import JobContext, WorkerOptions, cli, mcp
 from livekit.agents.llm import function_tool
 from livekit.agents.voice import Agent, AgentSession, RunContext
 from livekit.agents.voice.room_io import RoomInputOptions
-from livekit.plugins import cartesia, deepgram, openai, silero
+from livekit.plugins import cartesia, deepgram, openai, silero, groq
 
 # from livekit.plugins import noise_cancellation
 
@@ -20,6 +20,25 @@ logger = logging.getLogger("restaurant-example")
 logger.setLevel(logging.INFO)
 
 load_dotenv()
+
+def get_llm_instance(parallel_tool_calls=None):
+    """Get LLM instance based on environment configuration"""
+    llm_provider = os.getenv("LLM_PROVIDER", "openai").lower()
+    llm_model = os.getenv("LLM_MODEL", "gpt-4o-mini")
+    api_key = os.getenv("API_KEY")
+    
+    kwargs = {}
+    if parallel_tool_calls is not None:
+        kwargs["parallel_tool_calls"] = parallel_tool_calls
+    
+    if llm_provider == "openai":
+        return openai.LLM(model=llm_model, api_key=api_key, **kwargs)
+    elif llm_provider == "groq":
+        return groq.LLM(model=llm_model, api_key=api_key, **kwargs)
+    else:
+        # Add more providers as needed
+        logger.warning(f"Unsupported LLM provider: {llm_provider}. Falling back to OpenAI.")
+        return openai.LLM(model=llm_model, api_key=api_key, **kwargs)
 
 voices = {
     "greeter": "794f9389-aac1-45b6-b726-9d9369183238",
@@ -154,7 +173,7 @@ class Greeter(BaseAgent):
                 "- Use send_message tool to respond to external agents when they contact the restaurant\n"   
                 "- If customers want to send messages to external services, help facilitate that communication using send_message tool"
             ),
-            llm=openai.LLM(parallel_tool_calls=False),
+            llm=get_llm_instance(parallel_tool_calls=False),
             tts=cartesia.TTS(voice=voices["greeter"]),
         )
         self.menu = menu
@@ -332,7 +351,7 @@ async def entrypoint(ctx: JobContext):
     session = AgentSession[UserData](
         userdata=userdata,
         stt=deepgram.STT(),
-        llm=openai.LLM(),
+        llm=get_llm_instance(),
         tts=cartesia.TTS(),
         vad=silero.VAD.load(),
         max_tool_steps=5,
