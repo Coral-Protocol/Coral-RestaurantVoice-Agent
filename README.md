@@ -7,7 +7,7 @@ A multi-agent voice system for restaurants, enabling natural, seamless voice-bas
 
 ## Details
 - **Framework:** LiveKit Agents
-- **Tools Used:** Deepgram STT, Cartesia TTS, OpenAI LLM, Silero VAD
+- **Tools Used:** Deepgram STT, Cartesia TTS, OpenAI/Groq LLM, Silero VAD
 - **AI Model:** GPT-4
 - **Date Added:** January 2025
 - **License:** MIT
@@ -62,9 +62,10 @@ Update `.env` with:
 - `LIVEKIT_URL`
 - `LIVEKIT_API_KEY` ([Get LiveKit API Key](https://cloud.livekit.io/))
 - `LIVEKIT_API_SECRET` ([Get LiveKit API Secret](https://cloud.livekit.io/))
-- `OPENAI_API_KEY` ([Get OpenAI API Key](https://platform.openai.com/api-keys))
 - `DEEPGRAM_API_KEY` ([Get Deepgram API Key](https://deepgram.com/))
 - `CARTESIA_API_KEY` ([Get Cartesia API Key](https://play.cartesia.ai/keys))
+- `API_KEY` ([Get OpenAI API Key](https://platform.openai.com/api-keys)) /([Get GROQ API Key](https://console.groq.com/keys))
+- configure the LLM model you want to use
 
 </details>
 
