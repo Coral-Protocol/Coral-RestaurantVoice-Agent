@@ -8,7 +8,6 @@ A multi-agent voice system for restaurants, enabling natural, seamless voice-bas
 ## Details
 - **Framework:** LiveKit Agents
 - **Tools Used:** Deepgram STT, Cartesia TTS, OpenAI/Groq LLM, Silero VAD
-- **AI Model:** GPT-4
 - **Date Added:** January 2025
 - **License:** MIT
 - **Original Source:** [Restaurant Voice Agent System](https://github.com/livekit/agents/blob/main/examples/voice_agents/restaurant_agent.py)
