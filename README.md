@@ -121,6 +121,7 @@ Handles payments - calculates expenses, collects contact info and credit card de
 5. Provide payment information and complete transaction
 
 </details>
+</details>
 
 ## Creator Details
 - **Name:** Ahsen Tahir
