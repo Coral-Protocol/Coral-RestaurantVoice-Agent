@@ -23,10 +23,10 @@ Ensure that the [Coral Server](https://github.com/Coral-Protocol/coral-server) i
 
 ```bash
 # In a new terminal clone the repository:
-git clone https://github.com/Coral-Protocol/Coral-Restaurant-Voice-Agent.git
+git clone https://github.com/Coral-Protocol/Coral-RestaurantVoice-Agent.git
 
 # Navigate to the project directory:
-cd Coral-Restaurant-Voice-Agent
+cd Coral-RestaurantVoice-Agent
 # Install `uv`:
 pip install uv
 
