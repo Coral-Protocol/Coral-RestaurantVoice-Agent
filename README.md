@@ -2,6 +2,8 @@
 
 The Restaurant Voice Agent System is a multi-agent voice conversation system for restaurants that handles reservations, takeaway orders, and checkout through natural voice interactions. It features four specialized AI agents that seamlessly transfer conversations while maintaining context.
 
+[Agentimage](https://github.com/Coral-Protocol/awesome-agents-for-multi-agent-systems/blob/main/images/Coral-RestaurantVoice-Agent.png)
+
 ## Responsibility
 A multi-agent voice system for restaurants, enabling natural, seamless voice-based reservations, orders, and payments by routing conversations between specialized agents.
 
